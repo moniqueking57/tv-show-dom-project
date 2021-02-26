@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-undef
-const allEpisodes = getAllEpisodes();
 const searchBox = document.getElementById("livesearch");
 const pancakes = document.createElement("span");
 const rootElem = document.getElementById("root");
@@ -8,7 +6,26 @@ const xp = document.getElementById("chocolatePancakes");
 xp.appendChild(pancakes);
 
 function setup() {
-  makePageForEpisodes(allEpisodes);
+  getFetch();
+}
+
+function getFetch() {
+  fetch("https://api.tvmaze.com/shows/82/episodes")
+    .then((episodes) => {
+      // changing the json object to the javascript object (.json returns promise)
+      return episodes.json();
+    })
+
+    .then((data) => {
+      console.log(data);
+      makePageForEpisodes(data);
+      dropDown(data);
+      searchFunction(data);
+      selectMenu(data);
+      console.log("fetched");
+    })
+
+    .catch((err) => console.log("err", err));
 }
 
 function makePageForEpisodes(episodeList) {
@@ -57,8 +74,6 @@ function dropDown(arr) {
   clive.innerHTML = "";
   clive.insertAdjacentHTML("afterbegin", drops);
 }
-dropDown(allEpisodes);
-searchFunction(allEpisodes);
 
 function selectMenu(episodeList) {
   clive.addEventListener("change", (e) => {
@@ -78,6 +93,5 @@ function selectMenu(episodeList) {
     makePageForEpisodes(filteredList);
   });
 }
-selectMenu(allEpisodes);
 
 window.onload = setup;
