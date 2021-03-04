@@ -1,5 +1,5 @@
 const searchBox = document.getElementById("livesearch");
-const pancakes = document.createElement("span");
+const pancakes = document.getElementById("span");
 const rootElem = document.getElementById("root");
 const showDropBar = document.getElementById("tart");
 const clive = document.getElementById("pie");
@@ -47,7 +47,7 @@ function makePageForEpisodes(episodeList) {
       <h2>${item?.name}</h2><div>
       <img src="${item.image?.medium}" alt="">
       <br>
-      ${item?.summary}
+      <div class="summary">${item?.summary}</div>
       S${item?.season.toString().padStart(2, 0)}
       E${item?.number.toString().padStart(2, 0)}
       <br>
@@ -61,17 +61,19 @@ function makePageForShows(showList) {
   showList.forEach((item) => {
     rootElem.insertAdjacentHTML(
       "afterbegin",
-      `<div class="shows">
-      <h2>${item?.name}</h2><div>
+      `<h2>${item?.name}</h2><div>
+      <div class="shows">
+      <div class="flex-container">
       <img src="${item.image?.medium}" alt="">
       <br>
-      ${item?.summary}
-      <p> Runtime: ${item?.runtime}</p>
-      <p> Genre: ${item?.genres}</p>
-      <p> Status: ${item?.status}</p>
-      <p> Rating: ${item?.rating?.average}</p>
+      <div class="summary">${item?.summary}</div>
+      <p> Runtime: ${item?.runtime}
+      <br> Genre: ${item?.genres}
+      <br> Status: ${item?.status}
+      <br> Rating: ${item?.rating?.average}
       <br>
-      <a class="url" href=${item?.url}>Check the source</a>
+      <a class="url" href=${item?.url}>Check the source</a></p>
+      </div>
     </div>`
     );
   });
@@ -91,7 +93,7 @@ function searchFunction(episodeList) {
     rootElem.innerHTML = "";
     pancakes.innerHTML = `${filteredEpisodes.length}/${episodeList.length} results found.`; //the number of search results.
     makePageForEpisodes(filteredEpisodes);
-    makePageForShows(filteredEpisodes);
+    makePageForShows(showList);
   });
 }
 

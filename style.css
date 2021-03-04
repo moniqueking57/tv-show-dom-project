@@ -1,6 +1,9 @@
 #root {
   color: rgb(208, 207, 207);
 }
+#span {
+  color: rgb(208, 207, 207);
+}
 
 body {
   font-family: sans-serif;
@@ -14,4 +17,43 @@ h1 {
 
 .url {
   color: rgb(208, 207, 207);
+}
+
+#wrapper {
+  margin-bottom: 1.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* make it work */
+#search-bar {
+  width: 10rem;
+  margin: 1% auto;
+  height: 2rem;
+  font-size: 1rem;
+}
+
+.episodes img,
+.shows img {
+  margin-left: left;
+  width: 10rem;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.summary {
+  color: rgb(208, 207, 207);
+  font-size: 1rem;
+  font-family: sans-serif;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 30rem;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: justify;
+}
+
+.flex-container {
+  display: flex;
 }
