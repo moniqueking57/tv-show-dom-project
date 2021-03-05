@@ -3,19 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
+    <title>TV Show Project | Monique King (moniqueking57)</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
-    <div id="root">
+    <header>
+      <h1>TV Shows</h1>
+    </header>
+    <div id="wrapper">
+      <form id="search">
+        <div id="search-bar">
+          <input
+            id="livesearch"
+            type="text"
+            placeholder="Search Shows and Episodes"
+          />
+        </div>
+      </form>
     </div>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+    <select id="showBar"></select>
+    <select id="episodeBar"></select>
 
-    <!-- Loads YOUR javascript code -->
+    <div id="root"></div>
+    <span id="span"></span>
+
+    <script src="episodes.js"></script>
+    <script src="shows.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
