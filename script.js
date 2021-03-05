@@ -1,10 +1,10 @@
 const searchBox = document.getElementById("livesearch");
-const pancakes = document.getElementById("span");
+const searchForEpisodes = document.getElementById("span");
 const rootElem = document.getElementById("root");
-const showDropBar = document.getElementById("tart");
-const clive = document.getElementById("pie");
-const xp = document.getElementById("chocolatePancakes");
-xp.appendChild(pancakes);
+const showDropBar = document.getElementById("showBar");
+const episodeDropBar = document.getElementById("episodeBar");
+const xp = document.getElementById("search");
+xp.appendChild(searchForEpisodes);
 
 function setup() {
   let showList = getAllShows();
@@ -36,7 +36,7 @@ function getFetch(showId) {
       searchFunction(data);
       selectMenu(data);
     })
-    .catch((err) => console.log("err", err));
+    .catch((err) => console.log("error", err));
 }
 
 function makePageForEpisodes(episodeList) {
@@ -91,7 +91,7 @@ function searchFunction(episodeList) {
       );
     });
     rootElem.innerHTML = "";
-    pancakes.innerHTML = `${filteredEpisodes.length}/${episodeList.length} results found.`; //the number of search results.
+    searchForEpisodes.innerHTML = `${filteredEpisodes.length}/${episodeList.length} results found.`; //the number of search results.
     makePageForEpisodes(filteredEpisodes);
     makePageForShows(showList);
   });
@@ -106,12 +106,12 @@ function dropDown(arr) {
       E${item.number.toString().padStart(2, 0)}
       ${item.name}</option>`;
   });
-  clive.innerHTML = "";
-  clive.insertAdjacentHTML("afterbegin", drops);
+  episodeDropBar.innerHTML = "";
+  episodeDropBar.insertAdjacentHTML("afterbegin", drops);
 }
 
 function selectMenu(episodeList) {
-  clive.addEventListener("change", (e) => {
+  episodeDropBar.addEventListener("change", (e) => {
     e.preventDefault();
     const searchId = +e.target.value;
     let filteredList = [];
