@@ -3,5 +3,6 @@
         "all",
         "episodes",
         "get"
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }

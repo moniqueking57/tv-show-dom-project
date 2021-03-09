@@ -10,9 +10,21 @@ body {
   background-color: #1e2224;
 }
 
+#episode-btn {
+  height: 50px;
+  width: 80px;
+  margin: 10px;
+  padding: 10px;
+  align-items: right;
+}
+
 h1 {
   color: rgb(208, 207, 207);
   margin-bottom: 30px;
+}
+
+footer {
+  color: rgb(208, 207, 207);
 }
 
 .url {

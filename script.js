@@ -7,10 +7,11 @@ const xp = document.getElementById("search");
 xp.appendChild(searchForEpisodes);
 
 function setup() {
+  // eslint-disable-next-line no-undef
   let showList = getAllShows();
   showList.sort(function (a, b) {
-    var nameA = a.name.toUpperCase();
-    var nameB = b.name.toUpperCase();
+    let nameA = a.name.toUpperCase();
+    let nameB = b.name.toUpperCase();
     if (nameA < nameB) {
       return -1;
     }
@@ -22,6 +23,7 @@ function setup() {
   dropDown2(showList);
   selectMenu2(showList);
   makePageForShows(showList);
+  searchFunction2(showList); //HELP PLEASE!!! my search function now only searches shows not episodes as well?
 }
 
 function getFetch(showId) {
@@ -73,9 +75,23 @@ function makePageForShows(showList) {
       <br> Rating: ${item?.rating?.average}
       <br>
       <a class="url" href=${item?.url}>Check the source</a></p>
+      <button id="episode-btn">View episodes</button>
       </div>
     </div>`
     );
+    const clickBtn = document.getElementById("episode-btn");
+    clickBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      fetch(`https://api.tvmaze.com/shows/${item.id}/episodes`)
+        .then((episodes) => {
+          return episodes.json();
+        })
+        .then((data) => {
+          // console.log(data);
+          makePageForEpisodes(data);
+        });
+      // getFetch(item.id);
+    });
   });
 }
 
@@ -91,9 +107,24 @@ function searchFunction(episodeList) {
       );
     });
     rootElem.innerHTML = "";
-    searchForEpisodes.innerHTML = `${filteredEpisodes.length}/${episodeList.length} results found.`; //the number of search results.
+    searchForEpisodes.innerHTML = `${filteredEpisodes.length}/${episodeList.length} results found.`;
     makePageForEpisodes(filteredEpisodes);
-    makePageForShows(showList);
+  });
+}
+//creates search box and functionality for shows *** THIS WORK IS QUESTIONABLE!!!!
+function searchFunction2(showList) {
+  searchBox.addEventListener("input", (r) => {
+    r.preventDefault();
+    const searchString2 = r.target.value.toLowerCase();
+    let filteredShows = showList.filter((epis) => {
+      return (
+        epis.name.toLowerCase().includes(searchString2) ||
+        epis.summary.toLowerCase().includes(searchString2)
+      );
+    });
+    rootElem.innerHTML = "";
+    searchForEpisodes.innerHTML = `${filteredShows.length}/${filteredShows.length} results found.`;
+    makePageForShows(filteredShows);
   });
 }
 
@@ -141,9 +172,9 @@ function dropDown2(arr) {
 }
 
 function selectMenu2(showList) {
-  showDropBar.addEventListener("change", (candle) => {
-    candle.preventDefault();
-    const searching = +candle.target.value;
+  showDropBar.addEventListener("change", (e) => {
+    e.preventDefault();
+    const searching = +e.target.value;
     let filteredLists = [];
     if (searching === 1) {
       rootElem.innerHTML = "";
@@ -156,7 +187,7 @@ function selectMenu2(showList) {
       });
     }
     rootElem.innerHTML = "";
-    if (candle.target.value != 1) {
+    if (e.target.value != 1) {
       getFetch(filteredLists[0].id);
     }
   });
