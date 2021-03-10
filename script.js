@@ -23,7 +23,7 @@ function setup() {
   dropDown2(showList);
   selectMenu2(showList);
   makePageForShows(showList);
-  searchFunction2(showList); //HELP PLEASE!!! my search function now only searches shows not episodes as well?
+  searchFunction2(showList);
 }
 
 function getFetch(showId) {
@@ -63,7 +63,8 @@ function makePageForShows(showList) {
   showList.forEach((item) => {
     rootElem.insertAdjacentHTML(
       "afterbegin",
-      `<h2>${item?.name}</h2><div>
+      `<div id="hideInfo" style="display:block">
+      <h2>${item?.name}</h2><div>
       <div class="shows">
       <div class="flex-container">
       <img src="${item.image?.medium}" alt="">
@@ -75,7 +76,8 @@ function makePageForShows(showList) {
       <br> Rating: ${item?.rating?.average}
       <br>
       <a class="url" href=${item?.url}>Check the source</a></p>
-      <button id="episode-btn">View episodes</button>
+      <button class="btn" id="episode-btn" style="flex">View episodes</button>
+      </div>
       </div>
     </div>`
     );
@@ -87,15 +89,15 @@ function makePageForShows(showList) {
           return episodes.json();
         })
         .then((data) => {
-          // console.log(data);
           makePageForEpisodes(data);
+          rootElem.style.display = "none";
+          console.log("x", data);
         });
-      // getFetch(item.id);
     });
   });
 }
 
-//creates search box and functionality
+//creates search box and functionality for episodes
 function searchFunction(episodeList) {
   searchBox.addEventListener("input", (e) => {
     e.preventDefault();
@@ -111,7 +113,7 @@ function searchFunction(episodeList) {
     makePageForEpisodes(filteredEpisodes);
   });
 }
-//creates search box and functionality for shows *** THIS WORK IS QUESTIONABLE!!!!
+//creates search box and functionality for shows
 function searchFunction2(showList) {
   searchBox.addEventListener("input", (r) => {
     r.preventDefault();
