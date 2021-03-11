@@ -3,7 +3,6 @@
 }
 #span {
   color: rgb(208, 207, 207);
-  padding: 30px;
 }
 
 body {
@@ -44,9 +43,8 @@ footer {
   justify-content: space-between;
   align-items: center;
 }
-/* make it work */
+
 #search-bar {
-  width: 10rem;
   margin: 1% auto;
   height: 2rem;
   font-size: 1rem;
