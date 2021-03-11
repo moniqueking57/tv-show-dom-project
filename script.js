@@ -1,3 +1,5 @@
+//The code works when I click on the button but when I click on the drop down the button
+// is still available and it gets weirrdddd!!!!!
 const searchBox = document.getElementById("livesearch");
 const searchForEpisodes = document.getElementById("span");
 const rootElem = document.getElementById("root");
@@ -5,6 +7,7 @@ const showDropBar = document.getElementById("showBar");
 const episodeDropBar = document.getElementById("episodeBar");
 const xp = document.getElementById("search");
 xp.appendChild(searchForEpisodes);
+// let fetchedEpisodes;
 
 function setup() {
   // eslint-disable-next-line no-undef
@@ -32,7 +35,7 @@ function getFetch(showId) {
       return episodes.json();
     })
     .then((data) => {
-      makePageForEpisodes(data);
+      // fetchedEpisodes = data;
       makePageForShows(data);
       dropDown(data);
       searchFunction(data);
@@ -40,8 +43,9 @@ function getFetch(showId) {
     })
     .catch((err) => console.log("error", err));
 }
-
+// function for displaying the list of episodes
 function makePageForEpisodes(episodeList) {
+  rootElem.innerHTML = "";
   episodeList.forEach((item) => {
     rootElem.insertAdjacentHTML(
       "afterbegin",
@@ -59,11 +63,12 @@ function makePageForEpisodes(episodeList) {
   });
 }
 
+//function for displaying the list of shows and the button functionality
 function makePageForShows(showList) {
   showList.forEach((item) => {
     rootElem.insertAdjacentHTML(
       "afterbegin",
-      `<div id="hideInfo" style="display:block">
+      ` <div id="hideInfo" style="display:block">
       <h2>${item?.name}</h2><div>
       <div class="shows">
       <div class="flex-container">
@@ -81,6 +86,18 @@ function makePageForShows(showList) {
       </div>
     </div>`
     );
+    // I want the show list in alphabetical order
+    // showList.sort(function (a, b) {
+    //   let nameA = a.name.toUpperCase();
+    //   let nameB = b.name.toUpperCase();
+    //   if (nameA < nameB) {
+    //     return -1;
+    //   }
+    //   if (nameA > nameB) {
+    //     return 1;
+    //   }
+    //   return 0;
+    // });
     const clickBtn = document.getElementById("episode-btn");
     clickBtn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -90,7 +107,6 @@ function makePageForShows(showList) {
         })
         .then((data) => {
           makePageForEpisodes(data);
-          rootElem.style.display = "none";
           console.log("x", data);
         });
     });
