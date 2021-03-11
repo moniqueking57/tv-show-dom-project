@@ -3,22 +3,22 @@
 }
 #span {
   color: rgb(208, 207, 207);
+  padding: 30px;
 }
-
-/* #btn {
-  align-items: right;
-  justify-content: right;
-} */
 
 body {
   font-family: sans-serif;
   background-color: #1e2224;
 }
 
+.hiddenClass {
+  display: none;
+}
+
 #episode-btn {
   height: 50px;
   width: 80px;
-  margin: 10px;
+  margin: 20px;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
